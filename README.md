@@ -19,13 +19,13 @@ a safe theme-only repository for normal Omarchy installation.
 Install directly from GitHub:
 
 ```bash
-omarchy theme install [https://github.com/LokiX1/omarchy-loki-osiris-theme.git](https://github.com/LokiX1/omarchy-loki-osiris-theme.git)
+omarchy theme install https://github.com/LokiX1/omarchy-loki-osiris-theme.git
 ```
 
 Then select the installed theme from the Omarchy theme picker, or use:
 
 ```bash
-omarchy theme set <theme-name>
+omarchy theme set loki-osiris
 ```
 
 To find the exact installed theme directory name:
@@ -91,7 +91,7 @@ bright_magenta = "#d8ace8"
 To make the theme lighter or darker, edit `background` and reapply the theme:
 
 ```bash
-omarchy theme set <theme-name>
+omarchy theme set loki-osiris
 ```
 
 ## CLIamp companion theme
@@ -108,7 +108,7 @@ It is not installed automatically. To use it:
 mkdir -p ~/.config/cliamp/themes
 
 cp \
-  ~/.config/omarchy/themes/<theme-name>/extras/cliamp/loki-osiris-led.toml \
+  ~/.config/omarchy/themes/loki-osiris/extras/cliamp/loki-osiris-led.toml \
   ~/.config/cliamp/themes/
 ```
 
@@ -131,7 +131,7 @@ To update a previously installed Git theme after new changes are pushed:
 
 ```bash
 omarchy theme update
-omarchy theme set <theme-name>
+omarchy theme set loki-osiris
 ```
 
 Reapplying the theme ensures generated color-dependent application settings are
