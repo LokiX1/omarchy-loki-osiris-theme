@@ -1,0 +1,11 @@
+# Loki Osiris companion theme for CLIamp.
+# Select it inside CLIamp: t -> loki-osiris-led -> Enter
+
+accent = "#c060e0"
+bright_fg = "#e9d8ff"
+fg = "#a98dc2"
+
+# Classic LED visualizer tiers: lower spectrum -> middle -> peaks.
+green = "#7e6bff"
+yellow = "#c060e0"
+red = "#ff79c6"

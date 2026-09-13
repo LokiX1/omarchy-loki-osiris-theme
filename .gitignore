@@ -1,0 +1,11 @@
+# Local export/archive artifacts
+*.tar.gz
+*.tar.xz
+*.zip
+*.7z
+
+# Local editor and agent artifacts
+.claude/
+.agent/
+*.tmp
+*.log
