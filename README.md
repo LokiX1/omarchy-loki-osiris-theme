@@ -21,7 +21,7 @@ a safe theme-only repository for normal Omarchy installation.
 Install directly from GitHub:
 
 ```bash
-omarchy theme install [https://github.com/LokiX1/omarchy-loki-osiris-theme.git](https://github.com/LokiX1/omarchy-loki-osiris-theme.git)
+omarchy theme install https://github.com/LokiX1/omarchy-loki-osiris-theme.git
 ```
 
 Then select the theme:
