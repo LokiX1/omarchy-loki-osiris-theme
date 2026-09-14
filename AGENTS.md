@@ -1,0 +1,117 @@
+# Loki Osiris Theme Agent Guide
+
+This document provides essential information for agents working with the Loki Osiris theme repository, which is a dark purple-black Omarchy theme package.
+
+## Project Overview
+
+This repository contains a theme-only package for Omarchy desktop environment that provides:
+- A dark purple-black color palette based on the Osiris aesthetic
+- Fastfetch configuration with custom styling
+- Starship shell prompt configuration
+- Optional CLIamp companion theme for audio visualization
+
+## File Structure
+
+```
+.
+├── README.md                 # Main documentation
+├── colors.toml               # Core color definitions in TOML format
+├── shell.menu.toml           # Optional shell menu styling
+├── fastfetch/                # Fastfetch configuration and logo
+│   ├── images/
+│   │   └── loki-osiris.png   # Theme logo for fastfetch
+│   └── loki-osiris.jsonc     # Fastfetch JSON configuration
+├── starship/                 # Starship shell prompt configuration
+│   └── loki-osiris.toml      # Starship TOML configuration
+├── extras/                   # Optional components
+│   └── cliamp/
+│       └── loki-osiris-led.toml # CLIamp companion theme
+├── backgrounds/              # Wallpaper assets
+│   ├── osiris-live-still.png # Static still image
+│   └── CREDITS.md            # Attribution information
+└── docs/                     # Documentation files
+    ├── CLIAMP.md             # CLIamp integration guide
+    ├── FASTFETCH.md          # Fastfetch configuration documentation  
+    └── STARSHIP.md           # Starship configuration documentation
+```
+
+## Key Configuration Files
+
+### colors.toml
+The core palette definitions in TOML format with:
+- Dark background colors (`background`, `dark_background`, etc.)
+- Accent and foreground colors with multiple variants (bright, muted)
+- Color scheme for various UI elements
+
+### fastfetch/loki-osiris.jsonc
+Fastfetch configuration that includes:
+- Custom logo with specific dimensions and positioning
+- Hardware information modules with purple color theme
+- Software information modules using the theme's color palette
+- System status information like uptime, OS age, updates
+
+### starship/loki-osiris.toml
+Starship prompt configuration that:
+- Uses a multicolor bar layout with theme-specific gradients
+- Includes various system information modules (OS, username, directory, git)
+- Displays cloud provider context (AWS, GCP, Azure, OpenStack)
+- Shows container and kubernetes context
+
+### CLIamp Integration
+The optional CLIamp theme (`extras/cliamp/loki-osiris-led.toml`) maps:
+- Lower spectrum → indigo-violet (`#7e6bff`)
+- Middle spectrum → magenta (`#c060e0`)
+- Peaks → bright pink (`#ff79c6`)
+
+## Installation Commands
+
+### Install theme
+```bash
+omarchy theme install https://github.com/LokiX1/omarchy-loki-osiris-theme.git
+```
+
+### Set theme
+```bash
+omarchy theme set loki-osiris
+```
+
+### Update theme
+```bash
+omarchy theme update
+omarchy theme set loki-osiris
+```
+
+### Install CLIamp companion theme
+```bash
+mkdir -p ~/.config/cliamp/themes
+cp extras/cliamp/loki-osiris-led.toml ~/.config/cliamp/themes/
+```
+
+## Project Characteristics
+
+This is a **theme-only** package that:
+- Changes color palettes and assets
+- Does not modify personal desktop behavior or install executables
+- Is safe for normal Omarchy installation across multiple machines
+- Deliberately avoids installing or modifying system configuration files
+- Includes only static wallpaper and does not activate live wallpaper hooks
+
+This repository contains no source code to compile, test, or build. All configurations are in native formats (TOML, JSONC) that are applied directly by their respective tools (Omarchy, fastfetch, starship, CLIamp).
+
+## Integration Points
+
+### Fastfetch
+The fastfetch configuration is defined in `fastfetch/loki-osiris.jsonc` with custom modules for system information and color theming.
+
+### Starship
+The starship configuration includes a complex multicolor bar layout that integrates well with the purple-black theme aesthetic.
+
+### CLIamp
+The optional CLIamp companion theme maps the three spectrum tiers to specific colors from the Loki Osiris palette to provide audio visualization that matches the desktop theme.
+
+## Additional Resources
+
+For installation instructions, usage examples, and detailed information about each component:
+- [`docs/CLIAMP.md`](docs/CLIAMP.md) - CLIamp integration documentation
+- [`docs/FASTFETCH.md`](docs/FASTFETCH.md) - Fastfetch configuration documentation
+- [`docs/STARSHIP.md`](docs/STARSHIP.md) - Starship configuration documentation

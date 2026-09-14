@@ -3,40 +3,41 @@
 A dark purple-black Omarchy theme derived from the Osiris palette, packaged as
 a safe theme-only repository for normal Omarchy installation.
 
-![Loki Osiris desktop preview](screenshot-2026-09-12_21-27-02.png)
+![Loki Osiris desktop preview](screenshots/loki-osiris-desktop.png)
 
 ## Highlights
 
 - Deep purple-black base palette with violet, magenta, pink, blue, and cyan accents
-- Darker primary background: `#0d0719`
+- Near-black purple primary background: `#090511`
 - Static Osiris-inspired wallpaper still included under `backgrounds/`
 - Optional shell menu styling through `shell.menu.toml`
 - Optional CLIamp Classic LED companion theme with indigo, magenta, and pink spectrum tiers
-- Designed for normal Omarchy theme installation and use across multiple machines
+- Optional Fastfetch Kitty image-logo preset with the Loki portrait
+- Optional Bash Starship prompt companion preset
+- Designed for normal Omarchy theme installation and reuse across multiple machines
 
 ## Install
 
 Install directly from GitHub:
 
 ```bash
-omarchy theme install https://github.com/LokiX1/omarchy-loki-osiris-theme.git
+omarchy theme install [https://github.com/LokiX1/omarchy-loki-osiris-theme.git](https://github.com/LokiX1/omarchy-loki-osiris-theme.git)
 ```
 
-Then select the installed theme from the Omarchy theme picker, or use:
+Then select the theme:
 
 ```bash
 omarchy theme set loki-osiris
 ```
 
-To find the exact installed theme directory name:
+If your Omarchy version chooses a different installed directory name, list likely
+theme names and use the one returned:
 
 ```bash
 find ~/.config/omarchy/themes \
   -mindepth 1 -maxdepth 1 -type d \
   -printf '%f\n' | sort | grep -i 'loki\|osiris'
 ```
-
-Then use the name returned by that command with `omarchy theme set`.
 
 ## Scope and safety
 
@@ -53,9 +54,10 @@ It does **not** install or modify:
 - Super+Space keybindings
 - User startup hooks
 - `mpvpaper` or a live wallpaper startup configuration
+- Existing Fastfetch or Starship configurations automatically
 
-This means the theme can be installed normally without replacing the standard
-centered Omarchy menu or other personal shell customizations.
+This makes the theme safe to install without replacing the standard centered
+Omarchy menu or other personal shell customizations.
 
 ## Wallpaper
 
@@ -65,20 +67,17 @@ The repository includes a static still image:
 backgrounds/osiris-live-still.png
 ```
 
-It is a still derived from the original Osiris live-wallpaper aesthetic. See
-[`backgrounds/CREDITS.md`](backgrounds/CREDITS.md) for attribution details.
+See [`backgrounds/CREDITS.md`](backgrounds/CREDITS.md) for attribution details.
 
-The theme deliberately does not ship the original video wallpaper or activate
-any live-wallpaper hook.
+The repository does not include the original video wallpaper or activate a
+live-wallpaper hook.
 
 ## Customization
 
 The core palette is defined in [`colors.toml`](colors.toml).
 
-The most important base colors are:
-
 ```toml
-background = "#0d0719"
+background = "#090511"
 dark_background = "#09031a"
 darker_background = "#05020f"
 lighter_background = "#2a1050"
@@ -88,7 +87,7 @@ magenta = "#c060e0"
 bright_magenta = "#d8ace8"
 ```
 
-To make the theme lighter or darker, edit `background` and reapply the theme:
+Change `background` to adjust the overall darkness, then reapply the theme:
 
 ```bash
 omarchy theme set loki-osiris
@@ -96,13 +95,14 @@ omarchy theme set loki-osiris
 
 ## CLIamp companion theme
 
-An optional CLIamp companion theme for the **Classic LED** visualizer is included:
+An optional CLIamp companion theme for the **Classic LED** visualizer is
+included:
 
 ```text
 extras/cliamp/loki-osiris-led.toml
 ```
 
-It is not installed automatically. To use it:
+Install it manually:
 
 ```bash
 mkdir -p ~/.config/cliamp/themes
@@ -112,10 +112,9 @@ cp \
   ~/.config/cliamp/themes/
 ```
 
-Start CLIamp, play audio, press `t`, select `loki-osiris-led` with the arrow
-keys, then press `Enter` to save the selection.
+Start CLIamp, play audio, press `t`, select `loki-osiris-led`, and press Enter.
 
-The Classic LED visualizer is mapped as:
+The Classic LED visualizer maps:
 
 ```text
 Lower spectrum  → indigo-violet
@@ -123,22 +122,91 @@ Middle spectrum → Osiris magenta
 Peaks           → bright pink
 ```
 
-See [`docs/CLIAMP.md`](docs/CLIAMP.md) for the companion-theme details.
+See [`docs/CLIAMP.md`](docs/CLIAMP.md) for companion-theme details.
+
+## Fastfetch companion preset
+
+An optional Fastfetch configuration and portrait asset are included:
+
+```text
+fastfetch/loki-osiris.jsonc
+fastfetch/images/loki-osiris.png
+```
+
+![Loki Osiris Fastfetch and Starship preview](screenshots/loki-osiris-fastfetch-starship.png)
+
+The preset is designed for Kitty image rendering. Preview it without replacing
+your existing Fastfetch configuration:
+
+```bash
+fastfetch --config \
+  ~/.config/omarchy/themes/loki-osiris/fastfetch/loki-osiris.jsonc
+```
+
+To use it as your default Fastfetch configuration:
+
+```bash
+mkdir -p ~/.config/fastfetch/images
+
+cp \
+  ~/.config/omarchy/themes/loki-osiris/fastfetch/images/loki-osiris.png \
+  ~/.config/fastfetch/images/loki-osiris.png
+
+cp \
+  ~/.config/omarchy/themes/loki-osiris/fastfetch/loki-osiris.jsonc \
+  ~/.config/fastfetch/config.jsonc
+```
+
+The bundled portrait layout uses an image width of 41 columns, a height of 29
+rows, and padding of 1 top row plus 2 columns on each side. See
+[`docs/FASTFETCH.md`](docs/FASTFETCH.md) for details.
+
+## Starship companion preset
+
+An optional Starship prompt configuration for Bash is included:
+
+```text
+starship/loki-osiris.toml
+```
+
+Preview it in a temporary Bash shell:
+
+```bash
+STARSHIP_CONFIG=~/.config/omarchy/themes/loki-osiris/starship/loki-osiris.toml \
+  bash --noprofile --rcfile ~/.bashrc -i
+```
+
+To make it your default Starship configuration, back up and replace the normal
+Starship config:
+
+```bash
+cp -av \
+  ~/.config/starship.toml \
+  ~/.config/starship.toml.before-loki-osiris
+
+cp \
+  ~/.config/omarchy/themes/loki-osiris/starship/loki-osiris.toml \
+  ~/.config/starship.toml
+```
+
+See [`docs/STARSHIP.md`](docs/STARSHIP.md) for temporary and persistent
+`STARSHIP_CONFIG` override options.
 
 ## Update
 
-To update a previously installed Git theme after new changes are pushed:
+After pushing changes to this repository, update a previously installed Git
+theme with:
 
 ```bash
 omarchy theme update
 omarchy theme set loki-osiris
 ```
 
-Reapplying the theme ensures generated color-dependent application settings are
-refreshed.
+Reapplying the theme refreshes Omarchy-generated color-dependent application
+settings.
 
-## License and credits
+## Credits
 
 The theme palette is based on the Osiris aesthetic and adapted for a
-theme-only Omarchy workflow. Wallpaper/source attribution is documented in
+theme-only Omarchy workflow. Wallpaper attribution is documented in
 [`backgrounds/CREDITS.md`](backgrounds/CREDITS.md).

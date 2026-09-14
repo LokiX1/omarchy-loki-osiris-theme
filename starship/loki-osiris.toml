@@ -1,0 +1,325 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """
+[](#351c75)\
+$os\
+$username\
+[](bg:#6b4da3 fg:#351c75)\
+$directory\
+[](fg:#6b4da3 bg:color_aqua)\
+$git_branch\
+$git_status\
+[](fg:color_aqua bg:color_blue)\
+$c\
+$cpp\
+$rust\
+$golang\
+$nodejs\
+$php\
+$java\
+$kotlin\
+$haskell\
+$python\
+[](fg:color_blue bg:color_bg3)\
+$docker_context\
+$conda\
+$pixi\
+[](fg:color_bg3 bg:color_bg1)\
+$time\
+[ ](fg:color_bg1)\
+$line_break$character"""
+
+palette = 'gruvbox_dark'
+
+[palettes.gruvbox_dark]
+color_fg0 = '#fbf1c7'
+color_bg1 = '#3c3836'
+color_bg3 = '#665c54'
+color_blue = '#458588'
+color_aqua = '#68789d'
+color_green = '#98971a'
+color_orange = '#d65d0e'
+color_purple = '#b16286'
+color_red = '#cc241d'
+color_yellow = '#d79921'
+
+[os]
+disabled = false
+style = "bg:#351c75 fg:color_fg0"
+
+[os.symbols]
+Windows = "󰍲"
+Ubuntu = "󰕈"
+SUSE = ""
+Raspbian = "󰐿"
+Mint = "󰣭"
+Macos = "󰀵"
+Manjaro = ""
+Linux = "󰌽"
+Gentoo = "󰣨"
+Fedora = "󰣛"
+Alpine = ""
+Amazon = ""
+Android = ""
+Arch = "󰣇"
+Artix = "󰣇"
+EndeavourOS = ""
+CentOS = ""
+Debian = "󰣚"
+Redhat = "󱄛"
+RedHatEnterprise = "󱄛"
+Pop = ""
+
+# Show command duration for long operations (essential for DevOps)
+[cmd_duration]
+min_time = 1500
+format = 'took [$duration]($style) '
+style = 'bold yellow'
+
+# Enable hostname display for SSH sessions (useful for platform engineering)
+[hostname]
+disabled = false
+ssh_only = true
+format = '[$ssh_symbol$hostname]($style) in '
+style = 'bold dimmed green'
+ssh_symbol = '🌐'
+trim_at = '.'
+
+[username]
+show_always = true
+style_user = "bg:#351c75 fg:color_fg0"
+style_root = "bg:color_orange fg:color_fg0"
+format = '[ $user ]($style)'
+
+[directory]
+style = "fg:color_fg0 bg:#6b4da3"
+format = "[ $path ]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
+
+[directory.substitutions]
+"Documents" = "󰈙 "
+"Downloads" = " "
+"Music" = "󰝚 "
+"Pictures" = " "
+"Developer" = "󰲋 "
+
+# Infrastructure as Code context
+[terraform]
+disabled = false
+format = 'via [💠 $workspace]($style) '
+style = 'bold 105'
+
+[pulumi]
+disabled = false
+format = 'via [ $stack]($style) '
+style = 'bold magenta'
+
+# Multi-cloud context support (ordered by popularity in DevOps)
+[aws]
+disabled = false
+format = 'on [$symbol$profile(\($region\))]($style) '
+symbol = '☁️ '
+style = 'bold yellow'
+# Add common region aliases
+[aws.region_aliases]
+us-east-1 = 'use1'
+us-west-2 = 'usw2'
+eu-west-1 = 'euw1'
+ap-southeast-1 = 'apse1'
+
+[gcloud]
+disabled = true
+format = 'on [$symbol$project(\($region\))]($style) '
+
+symbol = '🇬 '
+
+style = 'bold blue'
+
+[azure]
+disabled = false
+format = 'on [$symbol$subscription]($style) '
+symbol = '🔷'
+style = 'bold cyan'
+
+[openstack]
+disabled = false
+format = 'on [$symbol$cloud(\($project\))]($style) '
+symbol = '☁️'
+style = 'bold yellow'
+
+# Container & Orchestration
+[kubernetes]
+disabled = true
+format = 'on [⛵ $context($namespace)]($style) '
+style = 'bold cyan'
+# Add context aliases for common patterns
+contexts = [
+  { context_pattern = ".*prod.*", style = "bold red", symbol = "🚨 " },
+  { context_pattern = ".*staging.*", style = "bold yellow", symbol = "⚠️ " },
+  { context_pattern = ".*dev.*", style = "bold green", symbol = "🧪 " },
+]
+detect_extensions = []  # Don't detect based on file extensions
+
+[docker_context]
+disabled = false
+format = 'via [🐳 $context]($style) '
+style = 'bold blue'
+
+[container]
+disabled = false
+format = '[$symbol \[$name\]]($style) '
+
+# Git with enhanced status
+[git_branch]
+style = "bg:color_aqua"
+symbol = '🌲'
+format = '[on $symbol$branch:$remote_branch]($style)'
+truncation_length = 20
+
+[git_status]
+disabled = false
+style = "bg:color_aqua"
+#format = '([(fg:color_fg0 bg:color_aqua)][\[$all_status$ahead_behind\](]($style))'
+format = '[\[$all_status$ahead_behind\]]($style)'
+conflicted = '⚔️'
+ahead = '⇡${count}'
+behind = '⇣${count}'
+diverged = '⇕⇡${ahead_count}⇣${behind_count}'
+up_to_date = ''
+untracked = '?${count}'
+stashed = '📦'
+modified = '!${count}'
+staged = '+${count}'
+renamed = '»${count}'
+deleted = '✗${count}'
+
+[git_state]
+style = "bg:color_aqua"
+disabled = false
+format = '[\($state( $progress_current of $progress_total)\)]($style) '
+
+[nodejs] 
+disabled = false
+symbol = '⬢'
+format = 'via [$symbol($version)]($style) '
+# Hide if bun is present (avoid conflicts)
+detect_files = ['package.json', '.node-version', '.nvmrc', '!bunfig.toml']
+
+[c]
+symbol = " "
+style = "bg:color_blue"
+format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'
+
+[cpp]
+symbol = " "
+style = "bg:color_blue"
+format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'
+
+[rust]
+disabled = false
+symbol = '󱘗 '
+format = 'via [$symbol($version)]($style) '
+
+[golang]
+disabled = false
+symbol = '🐿️'
+format = 'via [$symbol($version)]($style) '
+
+[php]
+symbol = ""
+style = "bg:color_blue"
+format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'
+
+[java]
+symbol = ""
+style = "bg:color_blue"
+format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'
+
+[kotlin]
+symbol = ""
+style = "bg:color_blue"
+format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'
+
+[haskell]
+symbol = ""
+style = "bg:color_blue"
+format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'
+
+[python]
+disabled = false
+symbol = '🐍'
+format = 'via [$symbol$virtualenv($version)]($style) '
+
+# Do not show Python merely because a .py file exists.
+detect_extensions = []
+
+# Display only for deliberate Python-project or environment markers.
+detect_files = ['pyproject.toml', 'Pipfile', 'poetry.lock', 'uv.lock', 'requirements.txt']
+detect_folders = ['.venv', 'venv']
+
+[helm]
+disabled = false
+format = 'via [⎈ $version]($style) '
+style = 'bold white'
+detect_files = ['Chart.yaml']  # Only show when Chart.yaml is present
+detect_folders = []            # Don't detect based on folders
+
+[conda]
+style = "bg:color_bg3"
+format = '[[ $symbol( $environment) ](fg:#83a598 bg:color_bg3)]($style)'
+
+[pixi]
+style = "bg:color_bg3"
+format = '[[ $symbol( $version)( $environment) ](fg:color_fg0 bg:color_bg3)]($style)'
+
+# Status indicator (useful for scripts)
+[status]
+disabled = false
+format = '[$symbol$status]($style) '
+style = 'bold red'
+success_symbol = ''
+symbol = '❌'
+not_executable_symbol = '🚫'
+not_found_symbol = '🔍'
+sigint_symbol = '🧱'
+
+# System info when relevant
+[memory_usage]
+disabled = false
+threshold = 90
+format = 'ram [$ram_pct]($style) '
+style = 'bold red'
+
+[jobs]
+disabled = false
+threshold = 1
+symbol_threshold = 1
+number_threshold = 2
+symbol = '✦'
+format = '[$symbol$number]($style) '
+
+# Environment indicators
+[nix_shell]
+disabled = false
+format = 'via [❄️ $state($name)]($style) '
+style = 'bold blue'
+
+[time]
+disabled = false
+time_format = "%R"
+style = "bg:color_bg1"
+format = '[[  $time ](fg:color_fg0 bg:color_bg1)]($style)'
+
+[line_break]
+disabled = false
+
+[character]
+disabled = false
+success_symbol = '[❯](color_purple)'
+error_symbol = '[✗](color_red)'
+vimcmd_symbol = '[V](color_green)'
+vimcmd_replace_one_symbol = '[V](bold fg:color_purple)'
+vimcmd_replace_symbol = '[V](bold fg:color_purple)'
+vimcmd_visual_symbol = '[V](bold fg:color_yellow)"[❮]'
+
