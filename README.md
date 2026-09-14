@@ -192,6 +192,32 @@ cp \
 See [`docs/STARSHIP.md`](docs/STARSHIP.md) for temporary and persistent
 `STARSHIP_CONFIG` override options.
 
+
+## Hyprland opacity companion
+
+Loki Osiris includes an optional Hyprland rule snippet for a subtle
+inactive-window fade:
+
+```text
+extras/hypr/loki-osiris-opacity.lua
+```
+
+The snippet matches the Loki Osiris desktop preference:
+
+- Focused normal windows: 1.00 opacity
+- Inactive normal windows: 0.98 opacity
+- Inactive Chromium- and Firefox-family browsers: 0.98 opacity
+- Video-playing windows: 1.00 opacity
+
+Omarchy 4.0.3 defines its default opacity rules outside the theme-template
+system, so this setting is intentionally **not applied automatically** by
+`omarchy theme install`. It is supplied as a small, reviewable companion
+snippet rather than replacing your personal
+`~/.config/hypr/looknfeel.lua`.
+
+See [`docs/HYPRLAND-OPACITY.md`](docs/HYPRLAND-OPACITY.md) for the safe
+installation procedure.
+
 ## Update
 
 After pushing changes to this repository, update a previously installed Git

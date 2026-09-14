@@ -9,3 +9,6 @@
 .agent/
 *.tmp
 *.log
+
+# Local Crush agent state
+.crush/
